@@ -20,7 +20,7 @@ public class PhysicsEngine : MonoBehaviour {
 		SetupTrails ();
 		physicsEngineArray = GameObject.FindObjectsOfType<PhysicsEngine> ();
 	}
-		
+
 	void FixedUpdate () {
 		RenderTrails ();
 		CalculateGravity ();
@@ -29,18 +29,19 @@ public class PhysicsEngine : MonoBehaviour {
 
 	public void AddForce (Vector3 forceVector) {
 		forceVectorList.Add (forceVector);
+		Debug.Log ("Adding force " + forceVector + " to " + gameObject.name);
 	}
 
 	void CalculateGravity () {
 		foreach (PhysicsEngine physicsEngineA in physicsEngineArray) {
 			foreach (PhysicsEngine physicsEngineB in physicsEngineArray) {
-				if (physicsEngineA != physicsEngineB) {
+				if (physicsEngineA != physicsEngineB && physicsEngineA != this) {
 					Debug.Log ("Calculating force exerted on " + physicsEngineA.name +
 					" due to the gravity of " + physicsEngineB.name);
 					
 					Vector3 offset = physicsEngineA.transform.position - physicsEngineB.transform.position;
-					float gravitMagnitude = bigG * physicsEngineA.mass * physicsEngineB.mass / Mathf.Pow (offset.magnitude, 2f);
-					Vector3 gravityVector = gravitMagnitude * offset.normalized;
+					float gravityMagnitude = bigG * physicsEngineA.mass * physicsEngineB.mass / Mathf.Pow (offset.magnitude, 2f);
+					Vector3 gravityVector = gravityMagnitude * offset.normalized;
 					physicsEngineB.AddForce (gravityVector);
 				}
 			}

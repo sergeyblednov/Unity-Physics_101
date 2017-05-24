@@ -38,7 +38,7 @@ public class RocketEngine : MonoBehaviour {
 	}
 
 	void ExertForce () {
-		currentThrust = thrustPercent * maxThrust * 1000f;
+		currentThrust = thrustPercent * maxThrust * 1000;
 		Vector3 thrustVector = thrustUnitVector.normalized * currentThrust;	// N
 		physicsEngine.AddForce (thrustVector);
 	}
