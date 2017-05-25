@@ -20,7 +20,7 @@ public class UniversalGravitation : MonoBehaviour {
 		physicsEngineArray = GameObject.FindObjectsOfType<PhysicsEngine> ();
 		foreach (PhysicsEngine physicsEngineA in physicsEngineArray) {
 			foreach (PhysicsEngine physicsEngineB in physicsEngineArray) {
-				if (physicsEngineA != physicsEngineB ) {
+				if (physicsEngineA != physicsEngineB  && physicsEngineA != this) {
 					Debug.Log ("Calculating force exerted on " + physicsEngineA.name +
 						" due to the gravity of " + physicsEngineB.name);
 
